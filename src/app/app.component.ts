@@ -10,6 +10,7 @@ import {DataService} from "../services/data.service";
 export class AppComponent implements OnInit{
   title = 'htlw';
   employees : Employee[] = [];
+  navBarHeader = 'PERSONAL';
 
   constructor(private dataService:DataService) {
 

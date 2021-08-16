@@ -11,7 +11,7 @@ export class DataService {
   constructor(private httpClient : HttpClient) { }
 
   public getAllEmployees(): Observable<Employee[]> {
-    return this.httpClient.get<Employee[]>('http://localhost:8080/employees');
+    return this.httpClient.get<Employee[]>('https://htlw-resman-backend.herokuapp.com/employees');
   }
 
 

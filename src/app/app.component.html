@@ -1,13 +1,16 @@
-<h1>
-  finally
-</h1>
-<h2>
-  meine erste webside
-</h2>
-<div>
-  <ul>
-    <li *ngFor="let employee of employees">
-      {{employee.firstName}}
-    </li>
-  </ul>
-</div>
+<app-nav-bar
+  [header]="navBarHeader">
+</app-nav-bar>
+<section>
+  <h2>
+    meine erste webside
+  </h2>
+  <div>
+    <ul>
+      <li *ngFor="let employee of employees">
+        {{employee.firstName}}
+      </li>
+    </ul>
+  </div>
+</section>
+
