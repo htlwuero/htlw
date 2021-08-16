@@ -12,6 +12,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatMenuModule} from "@angular/material/menu";
 import { DepartmentOverviewComponent } from './components/department/department-overview/department-overview.component';
+import {MatCardModule} from "@angular/material/card";
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { DepartmentOverviewComponent } from './components/department/department-
     MatToolbarModule,
     MatIconModule,
     MatButtonModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCardModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
