@@ -38,4 +38,5 @@ export class DepartmentDetailComponent implements OnInit {
   ngOnInit(): void {
   }
 
+
 }
