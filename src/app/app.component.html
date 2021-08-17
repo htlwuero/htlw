@@ -2,16 +2,6 @@
   [header]="navBarHeader">
 </app-nav-bar>
 <section>
-  <app-department-overview></app-department-overview>
-  <h2>
-    meine erste webside
-  </h2>
-  <div>
-    <ul>
-      <li *ngFor="let employee of employees">
-        {{employee.firstName}}
-      </li>
-    </ul>
-  </div>
+  <router-outlet></router-outlet>
 </section>
 

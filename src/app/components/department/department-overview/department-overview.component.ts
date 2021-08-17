@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DataService} from "../../../../services/data.service";
 import {Department} from "../../../../models/department";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-department-overview',
@@ -10,7 +11,8 @@ import {Department} from "../../../../models/department";
 export class DepartmentOverviewComponent implements OnInit {
   departments: Department[]=[];
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService,
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -20,6 +22,11 @@ export class DepartmentOverviewComponent implements OnInit {
       this.departments=departments;
     })
 
+  }
+
+  departmentClick(department: Department): void {
+    console.log(`department: ${department.departmentId}`);
+    this.router.navigate([`department/detail/${department.departmentId}`]);
   }
 
 }

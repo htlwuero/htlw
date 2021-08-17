@@ -17,10 +17,10 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.dataService.getAllEmployees().subscribe(
+    /*this.dataService.getAllEmployees().subscribe(
       data => {this.employees = data;
       console.log(data);
       }
-    )
+    )*/
   }
 }
