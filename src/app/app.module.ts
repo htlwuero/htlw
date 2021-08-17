@@ -14,6 +14,11 @@ import {MatMenuModule} from "@angular/material/menu";
 import { DepartmentOverviewComponent } from './components/department/department-overview/department-overview.component';
 import {MatCardModule} from "@angular/material/card";
 import { DepartmentDetailComponent } from './components/department/department-detail/department-detail.component';
+import {MatTableModule} from "@angular/material/table";
+import {MatSelectModule} from "@angular/material/select";
+
+
+
 
 @NgModule({
   declarations: [
@@ -31,7 +36,9 @@ import { DepartmentDetailComponent } from './components/department/department-de
     MatIconModule,
     MatButtonModule,
     MatMenuModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+    MatSelectModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
