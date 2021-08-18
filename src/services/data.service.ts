@@ -64,6 +64,6 @@ export class DataService {
   }
 
   public getEmployeesByDepartment(departmentId: number): Observable<Employee[]> {
-    return of(this.employeeTestData);
+    return this.httpClient.get<Employee[]>('http://localhost:8080/employees?departmentId='+departmentId);
   }
 }
