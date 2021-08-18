@@ -9,6 +9,9 @@ import {Department} from "../models/department";
 })
 export class DataService {
 
+  private baseUrl = 'https://htlw-resman-backend.herokuapp.com';
+//  private baseUrl = 'localhost:8080';
+
   private departmentTestData: Department[] = [{
     departmentId:1,
     department:'Abteilung 1'
@@ -50,20 +53,21 @@ export class DataService {
   constructor(private httpClient : HttpClient) { }
 
   public getAllEmployees(): Observable<Employee[]> {
-    return this.httpClient.get<Employee[]>('https://htlw-resman-backend.herokuapp.com/employees');
+    return this.httpClient.get<Employee[]>(this.baseUrl + '/employees');
   }
 
   public getAllDepartments(): Observable<Department[]> {
-    return of(this.departmentTestData);
-    //return this.httpClient.get<Department[]>('http://localhost:8080/departments');
+   // return of(this.departmentTestData);
+    return this.httpClient.get<Department[]>(this.baseUrl + '/departments');
   }
 
   public getDepartment(departmentId: number): Observable<Department | undefined> {
-    const foundDepartment = this.departmentTestData.find(testData => testData.departmentId === departmentId)
-    return of(foundDepartment);
+    return this.httpClient.get<Department>(this.baseUrl + '/departments/'+departmentId);
+  //  const foundDepartment = this.departmentTestData.find(testData => testData.departmentId === departmentId)
+ //   return of(foundDepartment);
   }
 
   public getEmployeesByDepartment(departmentId: number): Observable<Employee[]> {
-    return this.httpClient.get<Employee[]>('http://localhost:8080/employees?departmentId='+departmentId);
+    return this.httpClient.get<Employee[]>(this.baseUrl + '/employees?departmentId='+departmentId);
   }
 }
