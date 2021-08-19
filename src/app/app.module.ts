@@ -16,6 +16,7 @@ import {MatCardModule} from "@angular/material/card";
 import { DepartmentDetailComponent } from './components/department/department-detail/department-detail.component';
 import {MatTableModule} from "@angular/material/table";
 import {MatSelectModule} from "@angular/material/select";
+import {MatPaginatorModule} from "@angular/material/paginator";
 
 
 
@@ -38,7 +39,8 @@ import {MatSelectModule} from "@angular/material/select";
     MatMenuModule,
     MatCardModule,
     MatTableModule,
-    MatSelectModule
+    MatSelectModule,
+    MatPaginatorModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
