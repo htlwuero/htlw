@@ -17,6 +17,8 @@ import { DepartmentDetailComponent } from './components/department/department-de
 import {MatTableModule} from "@angular/material/table";
 import {MatSelectModule} from "@angular/material/select";
 import {MatPaginatorModule} from "@angular/material/paginator";
+import { EmployeeDetailComponent } from './components/employee/employee-detail/employee-detail.component';
+import {MatInputModule} from "@angular/material/input";
 
 
 
@@ -26,7 +28,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     AppComponent,
     NavBarComponent,
     DepartmentOverviewComponent,
-    DepartmentDetailComponent
+    DepartmentDetailComponent,
+    EmployeeDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +43,8 @@ import {MatPaginatorModule} from "@angular/material/paginator";
     MatCardModule,
     MatTableModule,
     MatSelectModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatInputModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

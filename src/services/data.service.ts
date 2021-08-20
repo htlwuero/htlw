@@ -56,6 +56,10 @@ export class DataService {
     return this.httpClient.get<Employee[]>(this.baseUrl + '/employees');
   }
 
+  public getEmployee(employeeId: number): Observable<Employee> {
+    return this.httpClient.get<Employee>(this.baseUrl + '/employees/' + employeeId);
+  }
+
   public getAllDepartments(): Observable<Department[]> {
    // return of(this.departmentTestData);
     return this.httpClient.get<Department[]>(this.baseUrl + '/departments');

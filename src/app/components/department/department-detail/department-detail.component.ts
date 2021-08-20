@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {DataService} from "../../../../services/data.service";
 import {Department} from "../../../../models/department";
 import {Employee} from "../../../../models/employee";
@@ -63,6 +63,7 @@ export class DepartmentDetailComponent implements OnInit {
   }
 
   constructor(private activatedRoute: ActivatedRoute,
+              private router: Router,
               private _dataService: DataService) {
     this.#departmentId = +activatedRoute.snapshot.params.id;
     console.log(this.#departmentId);
@@ -89,6 +90,11 @@ export class DepartmentDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  tableRowClick(row: Employee) {
+    console.log(row);
+    this.router.navigate([`employee/detail/${row.employeeId}`])
   }
 
 
