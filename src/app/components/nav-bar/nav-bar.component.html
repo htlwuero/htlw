@@ -20,7 +20,9 @@
   </mat-menu>
   <span>{{header}}</span>
   <span class="example-spacer"></span>
-  <button aria-hidden="false" aria-label="Example home icon">home
+  <button aria-hidden="false"
+          aria-label="Example home icon"
+  (click)="navigateToHome()">home
     <mat-icon>home</mat-icon>
   </button>
 </mat-toolbar>

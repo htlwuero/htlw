@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 import {DataService} from "../../../../services/data.service";
 import {Department} from "../../../../models/department";
 import {Employee} from "../../../../models/employee";
 import {forkJoin, Observable} from "rxjs";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
+
 
 export interface PeriodicElement {
   name: string;
@@ -34,32 +37,64 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class DepartmentDetailComponent implements OnInit {
 
   #departmentId: number;
+  #paginator: MatPaginator | undefined;
+  #dataSource: MatTableDataSource<Employee> | undefined;
   department: Department | undefined;
   employees: Employee[] = [];
-  //displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   displayedColumns: string[] = ['employeeId', 'firstName', 'lastName'];
-  dataSource = ELEMENT_DATA;
+
+  @ViewChild(MatPaginator)
+  set paginator(value: MatPaginator | undefined) {
+    this.#paginator = value;
+    this.setDataSourcePaginator();
+  }
+
+  get paginator(): MatPaginator | undefined {
+    return this.#paginator;
+  }
+
+  get dataSource(): MatTableDataSource<Employee> | undefined {
+    return this.#dataSource;
+  }
+
+  set dataSource(value: MatTableDataSource<Employee> | undefined) {
+    this.#dataSource = value;
+    this.setDataSourcePaginator();
+  }
 
   constructor(private activatedRoute: ActivatedRoute,
-              private dataService: DataService) {
+              private router: Router,
+              private _dataService: DataService) {
     this.#departmentId = +activatedRoute.snapshot.params.id;
     console.log(this.#departmentId);
 
     const data$: Observable<any>[] = [
-      dataService.getDepartment(this.#departmentId),
-      dataService.getEmployeesByDepartment(this.#departmentId)
+      _dataService.getDepartment(this.#departmentId),
+      _dataService.getEmployeesByDepartment(this.#departmentId)
     ]
 
     forkJoin(data$)
       .subscribe(responseData => {
         this.department = responseData[0];
         this.employees = responseData[1];
+        this.dataSource = new MatTableDataSource<Employee>(this.employees);
         console.log(this.department);
         console.log(this.employees);
       });
   }
 
+  setDataSourcePaginator() {
+    if(!!this.dataSource) {
+      this.dataSource.paginator = (this.paginator as MatPaginator);
+    }
+  }
+
   ngOnInit(): void {
+  }
+
+  tableRowClick(row: Employee) {
+    console.log(row);
+    this.router.navigate([`employee/detail/${row.employeeId}`])
   }
 
 

@@ -21,6 +21,9 @@ export class DepartmentOverviewComponent implements OnInit {
     this.dataService.getAllDepartments().subscribe(departments => {
       console.log(departments);
       this.departments=departments;
+      this.dataService.getDepartmentImages(this.departments).subscribe(images=>{
+        console.log(images)
+      })
     })
     this.dataService.getImageById(2).subscribe(image=>{
       this.image=image;
