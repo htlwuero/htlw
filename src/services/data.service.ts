@@ -3,14 +3,16 @@ import {HttpClient} from "@angular/common/http";
 import {Observable, of} from "rxjs";
 import {Employee} from "../models/employee";
 import {Department} from "../models/department";
+import {Image} from "../models/image";
+import {switchMap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
 
-  private baseUrl = 'https://htlw-resman-backend.herokuapp.com';
-//  private baseUrl = 'localhost:8080';
+ // private baseUrl = 'https://htlw-resman-backend.herokuapp.com';
+  private baseUrl = 'http://localhost:8080';
 
   private departmentTestData: Department[] = [{
     departmentId:1,
@@ -69,5 +71,16 @@ export class DataService {
 
   public getEmployeesByDepartment(departmentId: number): Observable<Employee[]> {
     return this.httpClient.get<Employee[]>(this.baseUrl + '/employees?departmentId='+departmentId);
+  }
+  public getImageById (imageId:number): Observable<Image | undefined>{
+    return this.httpClient.get<Image>(this.baseUrl + '/images/'+imageId);
+//    return this.httpClient.get<Image>(this.baseUrl + '/images').pipe(
+//      switchMap(images=>{
+//        return of( images.find(image=>image.imageId===imageId));
+//      })
+//    );
+  }
+  public getAllImages(): Observable<Image[]> {
+    return this.httpClient.get<Image[]>(this.baseUrl + '/images');
   }
 }

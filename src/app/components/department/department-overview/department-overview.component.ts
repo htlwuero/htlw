@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DataService} from "../../../../services/data.service";
 import {Department} from "../../../../models/department";
 import {Router} from "@angular/router";
+import {Image} from "../../../../models/image";
 
 @Component({
   selector: 'app-department-overview',
@@ -10,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class DepartmentOverviewComponent implements OnInit {
   departments: Department[]=[];
-
+  image:Image| undefined;
   constructor(private dataService: DataService,
               private router: Router) {
   }
@@ -21,7 +22,9 @@ export class DepartmentOverviewComponent implements OnInit {
       console.log(departments);
       this.departments=departments;
     })
-
+    this.dataService.getImageById(2).subscribe(image=>{
+      this.image=image;
+    })
   }
 
   departmentClick(department: Department): void {
