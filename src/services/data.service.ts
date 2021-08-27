@@ -90,14 +90,27 @@ export class DataService {
   public getAllImages(): Observable<Image[]> {
     return this.httpClient.get<Image[]>(this.baseUrl + '/images');
   }
- getDepartmentImages(departments:Department[]): Observable<(Image | undefined)[]>{
-  const images = departments.map(department=>{
+ getDepartmentImages(departments:Department[]): Observable<({departmentId: number; image: Image | undefined} )[]>{
+  const images :{
+    departmentId: number;
+    imageId: number | undefined ;
+  }[] = departments.map(department=>{
   const image = department.imageDepartmentRelations?.filter(image=>{
      return new Date(  image.validFrom) <= new Date()  && new Date( image.validTo ) >= new Date();
    });
-  return (!!!image || image.length === 0)? undefined: image[0].imageId;
+  return{
+    departmentId: department.departmentId, imageId: (!!!image || image.length === 0)? undefined: image[0].imageId
+  } ;
    });
-  const data$=images.filter(image=>!!image).map(image=>this.getImageById(image as number));
+  const data$=images
+    .filter(image=>!!image)
+    .map(image=>{
+    return  this.getImageById(image.imageId as number)
+        .pipe(
+          switchMap(response=>{
+            return of({departmentId: image.departmentId, image:response});
+          })
+        )});
    return forkJoin(
       data$
     );

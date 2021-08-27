@@ -11,7 +11,8 @@ import {Image} from "../../../../models/image";
 })
 export class DepartmentOverviewComponent implements OnInit {
   departments: Department[]=[];
-  image:Image| undefined;
+  departmentImages: ({departmentId: number; image: Image | undefined} )[]=[];
+
   constructor(private dataService: DataService,
               private router: Router) {
   }
@@ -22,11 +23,9 @@ export class DepartmentOverviewComponent implements OnInit {
       console.log(departments);
       this.departments=departments;
       this.dataService.getDepartmentImages(this.departments).subscribe(images=>{
-        console.log(images)
+        console.log(images) ;
+        this.departmentImages = images;
       })
-    })
-    this.dataService.getImageById(2).subscribe(image=>{
-      this.image=image;
     })
   }
 
@@ -34,5 +33,7 @@ export class DepartmentOverviewComponent implements OnInit {
     console.log(`department: ${department.departmentId}`);
     this.router.navigate([`department/detail/${department.departmentId}`]);
   }
-
+    getDepartmentImage(department: Department):Image | undefined {
+    return  this.departmentImages.find(image=>image.departmentId===department.departmentId)?.image;
+    }
 }

@@ -6,7 +6,7 @@
 <div class="employee-detail__container-detail">
       <mat-card class="employee-detail__card">
 
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <img class="employee-detail__employee-image" mat-card-image *ngIf="!!employeeImage" src="data:image/png;base64,{{employeeImage?.content}}">
         <mat-card-content>
           <h3>Steckbrief</h3>
 
