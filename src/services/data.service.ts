@@ -11,8 +11,8 @@ import {switchMap} from "rxjs/operators";
 })
 export class DataService {
 
-  // private baseUrl = 'https://htlw-resman-backend.herokuapp.com';
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'https://htlw-resman-backend.herokuapp.com';
+  //private baseUrl = 'http://localhost:8080';
 
   private departmentTestData: Department[] = [{
     departmentId: 1,
