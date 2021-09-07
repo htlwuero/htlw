@@ -19,6 +19,7 @@ export interface Department {
   persons?: DepartmentPersonRelation[];
   departmentEmployeeRelations?: DepartmentEmployeeRelation[];
   imageDepartmentRelations?: ImageDepartmentRelation[];
+  departmentRating?: string;
 }
 
 export interface DepartmentPersonRelation {

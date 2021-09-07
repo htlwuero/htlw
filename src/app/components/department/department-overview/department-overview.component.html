@@ -7,6 +7,16 @@
     <div mat-card-avatar class="example-header-image"></div>
     <mat-card-title>{{department.department}}</mat-card-title>
     <mat-card-subtitle>departmentId {{department.departmentId}}</mat-card-subtitle>
+    <div class="department-overview__department-traffic-light">
+      <!--
+      <div [class]="getBulbClass('red', department)"></div>
+      <div [class]="getBulbClass('orange', department)"></div>
+      <div [class]="getBulbClass('green', department)"></div>
+      -->
+      <div class="department-overview__department-traffic-light__bulb red"></div>
+      <div class="department-overview__department-traffic-light__bulb orange"></div>
+      <div class="department-overview__department-traffic-light__bulb green"></div>
+    </div>
   </mat-card-header>
   <img class="department-overview__department-image" mat-card-image *ngIf="!!getDepartmentImage(department)" src="data:image/png;base64,{{getDepartmentImage(department)?.content}}">
   <mat-card-actions>
