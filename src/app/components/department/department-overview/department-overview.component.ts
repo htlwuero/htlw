@@ -3,6 +3,7 @@ import {DataService} from "../../../../services/data.service";
 import {Department} from "../../../../models/department";
 import {Router} from "@angular/router";
 import {Image} from "../../../../models/image";
+import {RatingEnum} from "../../../../enums/rating-enum";
 
 @Component({
   selector: 'app-department-overview',
@@ -28,7 +29,7 @@ export class DepartmentOverviewComponent implements OnInit {
       this.departments = departments.map(department =>
         ({ ...department, departmentRating: this.ratings[Math.floor(Math.random() * this.ratings.length)]})
       );
-      this.departments.forEach(department => { department.departmentRating = 'gren'});
+      //this.departments.forEach(department => { department.departmentRating = 'green'});
       this.dataService.getDepartmentImages(this.departments).subscribe(images=>{
         console.log(images) ;
         this.departmentImages = images;
@@ -45,11 +46,17 @@ export class DepartmentOverviewComponent implements OnInit {
     }
 
   getBulbClass(color: string, department: Department)  {
-        return {
-        'department-overview__department-traffic-light__bulb' : true,
-        'green': department.departmentRating === 'green',
-        'orange': department.departmentRating === 'orange',
-        'red': department.departmentRating === 'red'
+    let bulbClassObject = {
+      'department-overview__department-traffic-light__bulb' : true,
+      'green': false,
+      'orange': false,
+      'red': false
     };
+
+    bulbClassObject.green = department.departmentRating === RatingEnum.GREEN && color === RatingEnum.GREEN ? true : false;
+    bulbClassObject.orange = department.departmentRating === RatingEnum.ORANGE  && color === RatingEnum.ORANGE ? true : false;
+    bulbClassObject.red = department.departmentRating === RatingEnum.RED &&  color === RatingEnum.RED ? true : false;
+
+    return bulbClassObject;
   }
 }
